@@ -110,7 +110,7 @@ class Server(object):
         nodes = [node for node in await asyncio.gather(*cos) if not node is None]
         spider = NodeSpiderCrawl(self.protocol, self.node, nodes, self.ksize, self.alpha)
         return await spider.find()
-            
+
     async def bootstrap_node(self, addr):
         result = await self.protocol.ping(addr, self.node.id)
         return Node(result[1], addr[0], addr[1]) if result[0] else None
@@ -139,7 +139,9 @@ class Server(object):
         Returns:
             :class:`None` if not found, the value otherwise.
         """
-        dkey = digest(key)
+        print(key)
+        dkey = digest(key) #40bd001563085fc35165329ea1ff5c5ecbdbbeef
+        print(dkey)
         # if this node has it, return it
         if self.storage.get(dkey) is not None:
             return self.storage.get(dkey)
